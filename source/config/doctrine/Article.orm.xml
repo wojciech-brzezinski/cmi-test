@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+
+    <entity name="App\Domain\Article" table="articles">
+        <id name="uuid" type="uuid" />
+
+        <field name="uri" type="uri" />
+
+        <embedded name="text" class="App\Domain\Shared\ValueObject\Text" />
+        <embedded name="title" class="App\Domain\Shared\ValueObject\Text" />
+    </entity>
+
+</doctrine-mapping>

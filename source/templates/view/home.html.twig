@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags("home") }}
+{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>HOMEPAGE</h1>
+
+        <section>
+            LAST COMMENTS:
+            <section data-section-last-comments></section>
+        </section>
+    </main>
+{% endblock %}

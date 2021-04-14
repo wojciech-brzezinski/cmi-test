@@ -1,0 +1,14 @@
+{
+  "entrypoints": {
+    "article": {
+      "js": [
+        "/build/article.js"
+      ]
+    },
+    "home": {
+      "js": [
+        "/build/home.js"
+      ]
+    }
+  }
+}

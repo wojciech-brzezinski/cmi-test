@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+    server:
+        image: nginx:1.19.10-alpine
+        ports:
+            - ${P_NGINX}:80
+        volumes:
+            - ${PROJECT_DIR}/docker/volumes/nginx/conf.d/:/etc/nginx/conf.d/
+            - ${PROJECT_DIR}/docker/volumes/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ${PROJECT_DIR}/source/:${PROJECT_DIR_INTERNAL}
+        networks:
+            - cmi
+
+    database:
+        image: mariadb:10.5.9
+        networks:
+            - cmi
+        environment:
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+
+    php:
+        build: images/php
+        working_dir: ${PROJECT_DIR_INTERNAL}
+        volumes:
+            - ${PROJECT_DIR}/source/:${PROJECT_DIR_INTERNAL}
+        networks:
+            - cmi
+
+    node:
+        image: node:15.14.0-alpine3.13
+        working_dir: ${PROJECT_DIR_INTERNAL}
+        tty: true
+        volumes:
+            - ${PROJECT_DIR}/source/:${PROJECT_DIR_INTERNAL}
+        networks:
+            - cmi
+
+    phpmyadmin:
+        image: phpmyadmin
+        ports:
+            - ${P_PMA}:80
+        networks:
+            - cmi
+        environment:
+            - PMA_HOST=database
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+
+networks:
+    cmi: ~

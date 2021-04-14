@@ -1,0 +1,21 @@
+api.comments.get_for_article:
+    path: /v1/comments
+    controller: App\UI\Http\Rest\Controller\Comment\GetArticleCommentsController
+    methods: [GET]
+
+api.comments.get_most_recent:
+    path: /v1/comments/recent
+    controller: App\UI\Http\Rest\Controller\Comment\GetLastCommentsController
+    methods: [GET]
+
+home:
+    path: /
+    controller: App\UI\Http\Web\Controller\HomeController
+    methods: [GET]
+
+article:
+    path: /{uri}
+    controller: App\UI\Http\Web\Controller\ArticleController
+    methods: [GET]
+    requirements:
+        uri: ".*"

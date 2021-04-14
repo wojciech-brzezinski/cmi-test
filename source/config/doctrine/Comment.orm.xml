@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+
+    <entity name="App\Domain\Comment" table="comments">
+        <id name="uuid" type="uuid" />
+
+        <embedded name="text" class="App\Domain\Shared\ValueObject\Text" />
+
+        <field name="createdAt" type="datetime" />
+        <field name="owner" column="owner_id" type="uuid" />
+    </entity>
+
+</doctrine-mapping>

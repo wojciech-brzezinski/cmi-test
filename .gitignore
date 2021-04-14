@@ -1,0 +1,9 @@
+/.idea/
+/source/node_modules/
+/source/var/
+/source/vendor/
+
+/docker/.env
+/source/.env.local
+/source/.env.local.php
+/source/.env.*.local

@@ -1,0 +1,36 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+
+    _instanceof:
+        App\Infrastructure\Http\Controller\HttpController:
+            bind:
+                $commands: "@messenger.commands"
+                $queries: "@messenger.queries"
+
+    App\UI\Http\Web\Controller\:
+        resource: "%kernel.project_dir%/src/UI/Http/Web/Controller/"
+        tags:
+            - { name: controller.service_arguments }
+
+    App\UI\Http\Rest\Controller\:
+        resource: "%kernel.project_dir%/src/UI/Http/Rest/Controller/"
+        tags:
+            - { name: controller.service_arguments }
+
+    App\Application\Query\:
+        resource: "%kernel.project_dir%/src/Application/Query/**/*Handler.php"
+        tags:
+            - { name: messenger.message_handler, bus: messenger.queries }
+
+    App\Infrastructure\Article\Query\Repository\:
+        resource: "%kernel.project_dir%/src/Infrastructure/Article/Query/Repository/"
+
+    App\Infrastructure\Comment\Query\Repository\:
+        resource: "%kernel.project_dir%/src/Infrastructure/Comment/Query/Repository/"
+
+    App\Infrastructure\Doctrine\ORM\Fixtures\:
+        resource: "%kernel.project_dir%/src/Infrastructure/Doctrine/ORM/Fixtures/"
+        tags:
+            - { name: doctrine.fixture.orm }

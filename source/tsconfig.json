@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "lib": ["dom"],
+        "target": "ES5",
+    },
+    "include": [
+        "./assets/**/*.ts"
+    ]
+}

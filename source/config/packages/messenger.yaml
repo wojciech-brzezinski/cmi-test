@@ -1,0 +1,7 @@
+framework:
+    messenger:
+        default_bus: messenger.default
+        buses:
+            messenger.default: ~
+            messenger.commands: ~
+            messenger.queries: ~
