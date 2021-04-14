@@ -24,9 +24,9 @@ final class ArticleFixture extends Fixture
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 2; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             $article = new Article(
-                Uri::createFromString("/article-$i"),
+                Uri::createFromString("/article$i"),
                 new Text($faker->sentence(5)),
                 new Text($faker->sentence(30))
             );

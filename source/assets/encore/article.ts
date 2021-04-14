@@ -1,23 +1,15 @@
-import $http from "axios";
-
-import { CreateCommentElement } from "../components/article/article-comments-section";
-
-const x: HTMLElement = document.querySelector("[data-section-comments]");
-
-async function loadComments(articleID: string) {
-    const response = await $http.get(`/v1/comments?article=${articleID}`);
-
-    return response.data;
-}
-
+import { CreateCommentElement } from "../components/comments/create-comment-element";
+import { CommentsAPI } from "../components/comments/api";
 
 (async function() {
-    const articleID = x.getAttribute("data-section-comments");
+    const section: HTMLElement = document.querySelector("[data-section-comments]");
+
+    const articleID = section.getAttribute("data-section-comments");
     
-    const comments = await loadComments(articleID);
+    const comments = await CommentsAPI.findForArticleID(articleID);
 
     for (let comment of comments) {
-        x.appendChild(
+        section.appendChild(
             CreateCommentElement(comment)
         );
     }
