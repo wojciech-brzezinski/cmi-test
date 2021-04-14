@@ -27,6 +27,7 @@ install:
 	$(MAKE) up
 	$(MAKE) composer-install
 	$(MAKE) npm-install
+	$(MAKE) orm-update
 	$(MAKE) orm-fixtures-load
 	$(MAKE) node-build
 
@@ -37,6 +38,9 @@ php:
 
 composer-install:
 	$(COMPOSE) exec --user 1000 php composer install
+
+orm-update:
+	$(COMPOSE) exec --user 1000 php bin/console doctrine:schema:update --force
 
 orm-fixtures-load:
 	$(COMPOSE) exec --user 1000 php bin/console doctrine:fixtures:load --no-interaction
